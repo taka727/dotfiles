@@ -21,16 +21,14 @@ gui:
       - white
     selectedLineBgColor:
       - blue
-
 git:
   # プッシュ時に自動的に upstream を設定
   autoFetch: true
   autoRefresh: true
   # ページングツール（delta が入っている場合は自動で使われる）
-  paging:
-    colorArg: always
-    useConfig: true
-
+  pagers:
+    - colorArg: always
+      useConfig: true
 # Vim スタイルのキーバインド
 keybinding:
   universal:
@@ -65,7 +63,7 @@ keybinding:
     openFile: "o"
     scrollUpMain: "<c-u>"
     scrollDownMain: "<c-d>"
-    executeCustomCommand: ":"
+    executeShellCommand: ":"
     createRebaseOptionsMenu: "r"
     pushFiles: "P"
     pullFiles: "p"
