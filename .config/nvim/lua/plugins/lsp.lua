@@ -5,7 +5,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     dependencies = { "williamboman/mason.nvim" },
     opts = {
-      ensure_installed = { "lua_ls", "ts_ls", "pyright", "gopls" },
+      ensure_installed = { "lua_ls", "ts_ls", "pyright" },
       automatic_installation = true,
     },
   },
@@ -23,7 +23,7 @@ return {
       })
 
       -- LSPサーバーを有効化（nvim-lspconfig がデフォルト設定を提供）
-      vim.lsp.enable({ "lua_ls", "ts_ls", "pyright", "gopls" })
+      vim.lsp.enable({ "lua_ls", "ts_ls", "pyright" })
 
       -- LSP接続時のみキーマップを設定
       vim.api.nvim_create_autocmd("LspAttach", {
