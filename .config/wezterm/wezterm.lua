@@ -1,40 +1,40 @@
-local wezterm = require 'wezterm'
+---@type Wezterm
+local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
--- Font
-config.font = wezterm.font('JetBrains Mono', { weight = 'Regular' })
+config.automatically_reload_config = true
+
+-- IME: 修飾なし・SHIFT のみ転送（CTRL を含めると誤爆が増える）
+---@diagnostic disable-next-line: assign-type-mismatch
+config.macos_forward_to_ime_modifier_mask = "SHIFT"
+
 config.font_size = 14.0
+config.font = wezterm.font("JetBrainsMono Nerd Font")
 
--- Color scheme
-config.color_scheme = 'Tokyo Night'
-
--- Window
 config.window_background_opacity = 0.95
 config.macos_window_background_blur = 20
-config.window_padding = {
-  left = 10,
-  right = 10,
-  top = 10,
-  bottom = 10,
-}
-config.window_decorations = 'RESIZE'
-config.initial_cols = 220
-config.initial_rows = 50
 
--- Tab bar
-config.enable_tab_bar = true
-config.use_fancy_tab_bar = false
-config.tab_bar_at_bottom = true
-config.hide_tab_bar_if_only_one_tab = true
+config.status_update_interval = 1500
 
--- Cursor
-config.default_cursor_style = 'BlinkingBar'
-config.cursor_blink_rate = 500
-
--- Scrollback
 config.scrollback_lines = 10000
+config.audible_bell = "Disabled"
 
--- Bell
-config.audible_bell = 'Disabled'
+-- QuickSelect: URL・ファイルパス・Git hash など
+config.disable_default_quick_select_patterns = true
+config.quick_select_patterns = {
+  "\\bhttps?://[\\w\\-._~:/?#@!$&'()*+,;=%]+",
+  "(?<=[\\s:=(\"'`])(?:~|/)[/\\w\\-.@~]+",
+  "(?m)^(?:~|/)[/\\w\\-.@~]+(?=\\s*$)",
+  "\\b[0-9a-f]{7,40}\\b",
+  "\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b",
+  "\\b[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\\b",
+  "\\b[\\w.+-]+@[\\w.-]+\\.[a-zA-Z]{2,}\\b",
+}
+
+require("appearance").apply_to_config(config)
+require("keymaps").apply_to_config(config)
+require("tab").apply_to_config(config)
+require("statusbar").apply_to_config(config)
+require("workspace").apply_to_config(config)
 
 return config

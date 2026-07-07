@@ -60,11 +60,16 @@ git config --global user.name "Your Name"
 git config --global user.email "your@email.com"
 ```
 
-### 6. アプリをインストール
+### 6. フォントをインストール
+
+```bash
+brew install --cask font-jetbrains-mono-nerd-font
+```
+
+### 7. アプリをインストール
 
 ```bash
 brew install --cask ghostty wezterm
-brew install stow
 ```
 
 ## Stow の使い方
