@@ -11,7 +11,7 @@ config.macos_forward_to_ime_modifier_mask = "SHIFT"
 config.font_size = 14.0
 config.font = wezterm.font("JetBrainsMono Nerd Font")
 
-config.window_background_opacity = 0.95
+config.window_background_opacity = 0.50
 config.macos_window_background_blur = 20
 
 config.status_update_interval = 1500
@@ -36,5 +36,6 @@ require("keymaps").apply_to_config(config)
 require("tab").apply_to_config(config)
 require("statusbar").apply_to_config(config)
 require("workspace").apply_to_config(config)
+require("background").apply_to_config(config)
 
 return config
