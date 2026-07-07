@@ -18,6 +18,22 @@ vim.opt.smartcase = true      -- 大文字が含まれる場合は区別
 vim.opt.hlsearch = true       -- 検索結果ハイライト
 
 -- =====================================================================
+-- 🪟 背景透過 (WezTermの背景・チートシート画像を透過させる)
+-- =====================================================================
+-- ColorScheme適用後に上書きするためautocmdで登録
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "*",
+  callback = function()
+    local transparent = { bg = "NONE", ctermbg = "NONE" }
+    for _, hl in ipairs({ "Normal", "NormalNC", "NormalFloat", "SignColumn", "EndOfBuffer" }) do
+      vim.api.nvim_set_hl(0, hl, transparent)
+    end
+  end,
+})
+-- 初回起動時にも適用
+vim.cmd("doautocmd ColorScheme")
+
+-- =====================================================================
 -- ⌨️ 快適キーマッピング (Keymaps)
 -- =====================================================================
 -- レジスタ・モードの割り当て用ショートカット関数
