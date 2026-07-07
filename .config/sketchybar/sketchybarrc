@@ -1,0 +1,84 @@
+#!/bin/bash
+
+# Tokyo Night colors
+BAR_COLOR=0xff1a1b26
+BACKGROUND_2=0xff24283b
+ICON_COLOR=0xff7aa2f7
+LABEL_COLOR=0xffc0caf5
+BORDER_COLOR=0xff414868
+
+FONT="JetBrainsMono Nerd Font"
+PADDING=6
+
+sketchybar --bar \
+  height=36 \
+  blur_radius=0 \
+  position=top \
+  sticky=on \
+  padding_left=12 \
+  padding_right=12 \
+  color=$BAR_COLOR \
+  border_width=0 \
+  margin=0 \
+  y_offset=0 \
+  corner_radius=0
+
+sketchybar --default \
+  padding_left=$PADDING \
+  padding_right=$PADDING \
+  icon.font="$FONT:Regular:14.0" \
+  icon.color=$ICON_COLOR \
+  label.font="$FONT:Regular:13.0" \
+  label.color=$LABEL_COLOR \
+  background.corner_radius=6 \
+  background.height=26 \
+  background.padding_left=4 \
+  background.padding_right=4
+
+# --- Left: Space indicators ---
+SPACE_ICONS=("1" "2" "3" "4" "5" "6" "7" "8" "9")
+
+for i in "${!SPACE_ICONS[@]}"; do
+  sid=$(($i + 1))
+  sketchybar --add space space.$sid left \
+    --set space.$sid \
+      associated_space=$sid \
+      icon="${SPACE_ICONS[$i]}" \
+      icon.padding_left=8 \
+      icon.padding_right=8 \
+      background.color=$BACKGROUND_2 \
+      background.border_width=1 \
+      background.border_color=$BORDER_COLOR \
+      label.drawing=off \
+      script="$HOME/.config/sketchybar/plugins/space.sh" \
+    --subscribe space.$sid space_change
+done
+
+# --- Center: Front app name ---
+sketchybar --add item front_app center \
+  --set front_app \
+    icon.drawing=off \
+    label.font="$FONT:SemiBold:13.0" \
+    label.color=$LABEL_COLOR \
+    script="$HOME/.config/sketchybar/plugins/front_app.sh" \
+  --subscribe front_app front_app_switched
+
+# --- Right: Date/Time, Battery, Volume ---
+sketchybar --add item clock right \
+  --set clock \
+    icon= \
+    update_freq=10 \
+    script="$HOME/.config/sketchybar/plugins/clock.sh"
+
+sketchybar --add item battery right \
+  --set battery \
+    update_freq=60 \
+    script="$HOME/.config/sketchybar/plugins/battery.sh" \
+  --subscribe battery system_woke power_source_change
+
+sketchybar --add item volume right \
+  --set volume \
+    script="$HOME/.config/sketchybar/plugins/volume.sh" \
+  --subscribe volume volume_change
+
+sketchybar --update

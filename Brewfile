@@ -5,6 +5,7 @@ brew "node"
 brew "zsh-autosuggestions"
 
 # --- Terminal Tools ---
+brew "fastfetch"
 brew "lazydocker"
 brew "lazygit"
 brew "ctop"

@@ -33,7 +33,7 @@ inline_nix_status() {
   fi
 }
 
-PROMPT='$(inline_nix_status)%F{cyan}%n%f:%F{yellow}%~%f ${vcs_info_msg_0_}$ '
+PROMPT='$(inline_nix_status)%F{cyan}%n%f:%F{yellow}%1~%f ${vcs_info_msg_0_}$ '
 
 # --- Git Aliases ---
 alias gs='git status'
@@ -58,6 +58,38 @@ command -v bat &>/dev/null && alias cat='bat --paging=never'
 command -v eza &>/dev/null && alias ls='eza --icons'
 command -v eza &>/dev/null && alias ll='eza -la --icons --git'
 command -v eza &>/dev/null && alias lt='eza --tree --icons -L 2'
+
+# --- Startup Display ---
+command -v fastfetch &>/dev/null && fastfetch
+
+# --- Git Repo Info on cd ---
+_last_git_root=""
+
+_show_git_repo_info() {
+  local git_root
+  git_root=$(git rev-parse --show-toplevel 2>/dev/null)
+
+  if [ -n "$git_root" ] && [ "$git_root" != "$_last_git_root" ]; then
+    _last_git_root="$git_root"
+    echo ""
+    echo "\033[33m── $(basename "$git_root") $(printf '─%.0s' {1..40})\033[0m" | head -c 60
+    echo "\033[0m"
+    git log --oneline -5 2>/dev/null
+    local memory_dir="$HOME/.claude/projects/$(echo "$git_root" | tr '/' '-')/memory"
+    if [ -f "$memory_dir/MEMORY.md" ]; then
+      echo ""
+      echo "\033[35m── Claude Memory ──\033[0m"
+      grep '^-' "$memory_dir/MEMORY.md" 2>/dev/null | head -8
+    fi
+    echo ""
+  elif [ -z "$git_root" ] && [ -n "$_last_git_root" ]; then
+    _last_git_root=""
+  fi
+}
+
+chpwd_functions+=(_show_git_repo_info)
+# 起動時にすでに git ディレクトリにいる場合も表示
+_show_git_repo_info
 
 # --- Docker Aliases ---
 alias ld='lazydocker'
