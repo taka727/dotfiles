@@ -34,6 +34,16 @@ alias gs='git status'
 alias gb='git branch'
 alias gl='git log --oneline -n 10'
 
+# --- Git TUI ---
+alias lg='lazygit'
+
+# --- GitHub CLI Aliases ---
+alias prl='gh pr list'
+alias prd='gh pr diff'
+alias prv='gh pr view'
+alias prc='gh pr create'
+alias prco='gh pr checkout'
+
 # --- Docker Aliases ---
 alias ld='lazydocker'
 alias dps='docker ps'

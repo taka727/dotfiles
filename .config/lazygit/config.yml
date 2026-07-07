@@ -1,0 +1,81 @@
+gui:
+  # ウィンドウサイズの比率
+  expandFocusedSidePanel: true
+  # マウス操作を有効化
+  mouseEvents: true
+  # 時刻表示フォーマット
+  timeFormat: "2006-01-02 15:04"
+  # コミットハッシュの表示文字数
+  commitLength:
+    show: true
+  # ブランチをリモートも含めて表示
+  showBranchCommitHash: true
+  # ボーダースタイル（WezTermで綺麗に見える）
+  border: "rounded"
+  # テーマ
+  theme:
+    activeBorderColor:
+      - green
+      - bold
+    inactiveBorderColor:
+      - white
+    selectedLineBgColor:
+      - blue
+
+git:
+  # プッシュ時に自動的に upstream を設定
+  autoFetch: true
+  autoRefresh: true
+  # ページングツール（delta が入っている場合は自動で使われる）
+  paging:
+    colorArg: always
+    useConfig: true
+
+# Vim スタイルのキーバインド
+keybinding:
+  universal:
+    quit: "q"
+    quit-alt1: "<c-c>"
+    return: "<esc>"
+    quitWithoutChangingDirectory: "Q"
+    togglePanel: "<tab>"
+    prevItem: "k"
+    nextItem: "j"
+    prevItem-alt: "<up>"
+    nextItem-alt: "<down>"
+    prevPage: "<c-b>"
+    nextPage: "<c-f>"
+    scrollLeft: "H"
+    scrollRight: "L"
+    gotoTop: "g"
+    gotoBottom: "G"
+    prevBlock: "<left>"
+    nextBlock: "<right>"
+    prevBlock-alt: "h"
+    nextBlock-alt: "l"
+    nextMatch: "n"
+    prevMatch: "N"
+    startSearch: "/"
+    optionMenu: "x"
+    select: "<space>"
+    goInto: "<enter>"
+    remove: "d"
+    new: "n"
+    edit: "e"
+    openFile: "o"
+    scrollUpMain: "<c-u>"
+    scrollDownMain: "<c-d>"
+    executeCustomCommand: ":"
+    createRebaseOptionsMenu: "r"
+    pushFiles: "P"
+    pullFiles: "p"
+    refresh: "R"
+    createPatchOptionsMenu: "<c-p>"
+    nextTab: "]"
+    prevTab: "["
+    copyToClipboard: "<c-o>"
+    submitEditorText: "<enter>"
+    extrasMenu: "@"
+    toggleWhitespaceInDiffView: "<c-w>"
+    increaseContextInDiffView: "}"
+    decreaseContextInDiffView: "{"
