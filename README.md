@@ -32,7 +32,7 @@ macOS の設定ファイルを管理するリポジトリ。
 ### 2. このリポジトリをクローン
 
 ```bash
-git clone https://github.com/<username>/dotfiles.git ~/dotfiles
+git clone https://github.com/taka727/dotfiles.git ~/dotfiles
 ```
 
 ### 3. GNU Stow をインストール
