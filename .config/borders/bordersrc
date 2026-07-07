@@ -1,0 +1,11 @@
+#!/bin/bash
+
+options=(
+    style=round
+    width=6.0
+    hidpi=on
+    active_color=0xffff9e64   # Tokyo Night orange
+    inactive_color=0xff1a1b26 # Tokyo Night background (ほぼ見えない)
+)
+
+borders "${options[@]}"

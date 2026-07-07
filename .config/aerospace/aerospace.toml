@@ -1,0 +1,10 @@
+config-version = 2
+
+[mode.main.binding]
+# Move focused window to another monitor
+alt-shift-right = 'move-node-to-monitor --wrap-around next'
+alt-shift-left  = 'move-node-to-monitor --wrap-around prev'
+
+# Focus another monitor
+alt-right = 'focus-monitor --wrap-around next'
+alt-left  = 'focus-monitor --wrap-around prev'
