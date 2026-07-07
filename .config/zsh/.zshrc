@@ -1,6 +1,12 @@
 # --- Homebrew Path ---
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
+# --- WezTerm Shell Integration (ScrollToPromptを有効化) ---
+if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
+  local _wsi="/Applications/WezTerm.app/Contents/Resources/shell-integration.sh"
+  [[ -f "$_wsi" ]] && source "$_wsi"
+fi
+
 # --- Zsh Auto Suggestions ---
 if [ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
   source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -43,6 +49,15 @@ alias prd='gh pr diff'
 alias prv='gh pr view'
 alias prc='gh pr create'
 alias prco='gh pr checkout'
+
+# --- Better CLI Tools ---
+if command -v fzf &>/dev/null; then
+  eval "$(fzf --zsh)"
+fi
+command -v bat &>/dev/null && alias cat='bat --paging=never'
+command -v eza &>/dev/null && alias ls='eza --icons'
+command -v eza &>/dev/null && alias ll='eza -la --icons --git'
+command -v eza &>/dev/null && alias lt='eza --tree --icons -L 2'
 
 # --- Docker Aliases ---
 alias ld='lazydocker'
