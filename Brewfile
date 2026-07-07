@@ -1,3 +1,6 @@
+# --- Languages ---
+brew "node"
+
 # --- Shell ---
 brew "zsh-autosuggestions"
 
