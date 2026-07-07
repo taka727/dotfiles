@@ -17,20 +17,26 @@ return {
       "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
-      local lspconfig    = require("lspconfig")
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      local opts         = { noremap = true, silent = true }
+      -- cmp_nvim_lsp の補完候補をすべてのサーバーに適用
+      vim.lsp.config("*", {
+        capabilities = require("cmp_nvim_lsp").default_capabilities(),
+      })
 
-      vim.keymap.set("n", "gd",          vim.lsp.buf.definition,   opts)
-      vim.keymap.set("n", "K",           vim.lsp.buf.hover,        opts)
-      vim.keymap.set("n", "<leader>rn",  vim.lsp.buf.rename,       opts)
-      vim.keymap.set("n", "<leader>ca",  vim.lsp.buf.code_action,  opts)
-      vim.keymap.set("n", "gr",          vim.lsp.buf.references,   opts)
-      vim.keymap.set("n", "<leader>e",   vim.diagnostic.open_float, opts)
+      -- LSPサーバーを有効化（nvim-lspconfig がデフォルト設定を提供）
+      vim.lsp.enable({ "lua_ls", "ts_ls", "pyright", "gopls" })
 
-      for _, server in ipairs({ "lua_ls", "ts_ls", "pyright", "gopls" }) do
-        lspconfig[server].setup({ capabilities = capabilities })
-      end
+      -- LSP接続時のみキーマップを設定
+      vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(args)
+          local opts = { noremap = true, silent = true, buffer = args.buf }
+          vim.keymap.set("n", "gd",          vim.lsp.buf.definition,    opts)
+          vim.keymap.set("n", "K",           vim.lsp.buf.hover,         opts)
+          vim.keymap.set("n", "<leader>rn",  vim.lsp.buf.rename,        opts)
+          vim.keymap.set("n", "<leader>ca",  vim.lsp.buf.code_action,   opts)
+          vim.keymap.set("n", "gr",          vim.lsp.buf.references,    opts)
+          vim.keymap.set("n", "<leader>e",   vim.diagnostic.open_float, opts)
+        end,
+      })
     end,
   },
 
