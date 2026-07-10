@@ -38,4 +38,20 @@ require("statusbar").apply_to_config(config)
 require("workspace").apply_to_config(config)
 require("background").apply_to_config(config)
 
+wezterm.on("gui-startup", function()
+  wezterm.run_child_process({ "aerospace", "enable", "on" })
+end)
+
+wezterm.on("gui-shutdown", function()
+  wezterm.run_child_process({ "aerospace", "enable", "off" })
+end)
+
+wezterm.on("window-close-requested", function(window, _pane)
+  local wins = wezterm.gui.gui_windows()
+  if #wins <= 1 then
+    wezterm.run_child_process({ "aerospace", "enable", "off" })
+  end
+  return false
+end)
+
 return config
