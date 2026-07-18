@@ -1,0 +1,17 @@
+#!/bin/zsh
+# Google カレンダーを定期再描画で表示し続ける（WezTerm ペイン / nvim toggleterm 共用）
+
+command -v gcalcli >/dev/null || export PATH="/opt/homebrew/bin:$PATH"
+
+if ! command -v gcalcli >/dev/null; then
+  echo "gcalcli が見つかりません。brew bundle を実行してください。"
+  exec ${SHELL:-/bin/zsh}
+fi
+
+while true; do
+  clear
+  gcalcli calw 2 --monday
+  echo
+  gcalcli agenda
+  sleep 300
+done

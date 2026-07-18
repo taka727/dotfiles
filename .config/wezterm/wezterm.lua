@@ -38,8 +38,14 @@ require("statusbar").apply_to_config(config)
 require("workspace").apply_to_config(config)
 require("background").apply_to_config(config)
 
-wezterm.on("gui-startup", function()
+local calendar = require("calendar")
+calendar.apply_to_config(config)
+
+wezterm.on("gui-startup", function(cmd)
   wezterm.run_child_process({ "aerospace", "enable", "on" })
+  -- 起動時に自前でウィンドウを生成し、右側にカレンダーペインを常設する
+  local _, pane, _ = wezterm.mux.spawn_window(cmd or {})
+  calendar.open(pane)
 end)
 
 wezterm.on("gui-shutdown", function()

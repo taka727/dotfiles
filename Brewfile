@@ -16,6 +16,7 @@ brew "bat"
 brew "eza"
 brew "ripgrep"
 brew "fd"
+brew "gcalcli"
 
 # --- Font ---
 cask "font-jetbrains-mono-nerd-font"
