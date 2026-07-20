@@ -18,5 +18,8 @@ brew "ripgrep"
 brew "fd"
 brew "gcalcli"
 
+# --- GUI Apps ---
+cask "karabiner-elements"
+
 # --- Font ---
 cask "font-jetbrains-mono-nerd-font"

@@ -1,4 +1,4 @@
-#files: 980	version: 5.9
+#files: 990	version: 5.9
 
 _comps=(
 '_arguments' '__arguments'
@@ -175,6 +175,7 @@ _comps=(
 'basename' '_basename'
 'basenc' '_basenc'
 'bash' '_bash'
+'bat' '_bat'
 'batch' '_at'
 'baz' '_baz'
 'beadm' '_beadm'
@@ -462,12 +463,14 @@ _comps=(
 'express' '_webbrowser'
 'extcheck' '_java'
 'extractres' '_psutils'
+'eza' '_eza'
 'fakeroot' '_fakeroot'
 'false' '_nothing'
 'fastfetch' '_fastfetch'
 'fc' '_fc'
 'fc-list' '_xft_fonts'
 'fc-match' '_xft_fonts'
+'fd' '_fd'
 'feh' '_feh'
 'fetch' '_fetch'
 'fetchmail' '_fetchmail'
@@ -597,6 +600,7 @@ _comps=(
 'gln' '_ln'
 'global' '_global'
 'glocate' '_locate'
+'glow' '_glow'
 'gls' '_ls'
 'gm' '_graphicsmagick'
 'gmake' '_make'
@@ -1250,6 +1254,7 @@ _comps=(
 'reprepro' '_reprepro'
 'restart' '_initctl'
 'retawq' '_webbrowser'
+'rg' '_rg'
 'rgrep' '_grep'
 'rgview' '_vim'
 'rgvim' '_vim'
@@ -1845,9 +1850,11 @@ bindkey '^[,' _history-complete-newer
 bindkey '^[/' _history-complete-older
 bindkey '^[~' _bash_complete-word
 
-autoload -Uz _aerospace _brew _fastfetch _gcalcli _gh \
-            _ghostty _wezterm _aerospace _brew _fastfetch \
-            _gcalcli _gh _ghostty _wezterm __arguments \
+autoload -Uz _aerospace _bat _brew _eza _fastfetch \
+            _fd _gcalcli _gh _ghostty _glow \
+            _rg _wezterm _aerospace _bat _brew \
+            _eza _fastfetch _fd _gcalcli _gh \
+            _ghostty _glow _rg _wezterm __arguments \
             _a2ps _a2utils _aap _abcde _absolute_command_paths \
             _ack _acpi _acpitool _acroread _adb \
             _add-zle-hook-widget _add-zsh-hook _alias _aliases _all_labels \
