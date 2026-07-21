@@ -9,4 +9,32 @@ return {
       vim.g.bullets_outline_levels = { "ROM", "ABC", "num", "abc", "rom", "std-" }
     end,
   },
+  {
+    "toppair/peek.nvim",
+    ft = "markdown",
+    build = "deno task --quiet build:fast",
+    keys = {
+      {
+        "<Leader>mp",
+        function()
+          local peek = require("peek")
+          if peek.is_open() then
+            peek.close()
+          else
+            peek.open()
+          end
+        end,
+        ft = "markdown",
+        desc = "Markdown プレビューをトグル (peek)",
+      },
+    },
+    opts = {
+      app = "browser",
+    },
+    config = function(_, opts)
+      require("peek").setup(opts)
+      vim.api.nvim_create_user_command("PeekOpen", function() require("peek").open() end, {})
+      vim.api.nvim_create_user_command("PeekClose", function() require("peek").close() end, {})
+    end,
+  },
 }

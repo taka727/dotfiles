@@ -35,7 +35,7 @@ brew bundle
 ### Neovim (`.config/nvim/`)
 - `init.lua` が lazy.nvim をブートストラップし、`config/` と `plugins/` を読み込む
 - `lua/config/options.lua` / `lua/config/keymaps.lua` — 基本設定。`<Leader>` は `<Space>`
-- `lua/plugins/` — 関心ごとにファイル分割: `colorscheme`、`editor`（Telescope + Treesitter）、`lsp`（Mason → mason-lspconfig → nvim-lspconfig + nvim-cmp）、`git`、`markdown`、`terminal`
+- `lua/plugins/` — 関心ごとにファイル分割: `colorscheme`、`editor`（Telescope + Treesitter）、`lsp`（Mason → mason-lspconfig → nvim-lspconfig + nvim-cmp）、`git`、`markdown`、`terminal`、`ime`（im-select で挿入モード離脱時に英字入力へ切替）
 - LSP サーバーは Mason で管理: `lua_ls`、`ts_ls`、`pyright`
 
 ### WezTerm (`.config/wezterm/`)
@@ -57,3 +57,6 @@ brew bundle
 | `~/.gitconfig` | 氏名・メールアドレス等の個人情報を含む |
 | `~/.config/gh/` | GitHub CLI のトークンを含む |
 | `~/.config/vscode/` | 拡張機能トークン等を含む可能性がある |
+| `~/.config/zsh/.zsh_history` | シェルの実行履歴。コマンドに含まれる情報が漏れる可能性がある |
+| `~/.config/zsh/.zcompdump`、`.zcompcache/` | zsh の補完キャッシュ。環境ごとに自動生成される |
+| `~/.config/karabiner/automatic_backups/` | Karabiner-Elements が自動生成するバックアップ |
