@@ -7,11 +7,17 @@ macOS の設定ファイルを管理するリポジトリ。
 | パス | 内容 |
 |------|------|
 | `.config/aerospace/` | AeroSpace (ウィンドウマネージャー) |
+| `.config/bin/` | 自作スクリプト（`gcal-watch` など） |
+| `.config/borders/` | JankyBorders (フォーカス中ウィンドウの枠線) |
+| `.config/karabiner/` | Karabiner-Elements (キーリマップ) |
+| `.config/lazygit/` | lazygit |
 | `.config/nvim/` | Neovim |
-| `.config/sketchbar/` | SketchyBar |
+| `.config/sketchybar/` | SketchyBar |
 | `.config/wezterm/` | WezTerm |
 | `.config/zsh/` | Zsh (`.zshrc`, `.zprofile`) |
 | `.zshenv` | Zsh 起動時に `ZDOTDIR` を設定 |
+| `Brewfile` | `brew bundle` でインストールするパッケージ・アプリ一覧 |
+| `.claude/` | Claude Code の設定・スクリプト |
 
 ## 管理対象外（ホームに直接置く）
 
@@ -20,6 +26,8 @@ macOS の設定ファイルを管理するリポジトリ。
 | `~/.gitconfig` | メールアドレス等の個人情報を含むため |
 | `~/.config/gh/` | GitHub CLI のトークンを含むため |
 | `~/.config/vscode/` | 拡張機能トークン等を含む可能性があるため |
+| `~/.config/zsh/.zsh_history` | シェルの実行履歴を含むため |
+| `~/.config/karabiner/automatic_backups/` | Karabiner-Elements が自動生成するバックアップのため |
 
 ## 新しい Mac でのセットアップ手順
 
@@ -33,18 +41,20 @@ macOS の設定ファイルを管理するリポジトリ。
 
 ```bash
 git clone https://github.com/taka727/dotfiles.git ~/dotfiles
+cd ~/dotfiles
 ```
 
-### 3. GNU Stow をインストール
+### 3. brew bundle でパッケージ・アプリを一括インストール
+
+`Brewfile` に GNU Stow、CLI ツール、AeroSpace / SketchyBar / JankyBorders / WezTerm / Ghostty / Karabiner-Elements・フォントまで全て定義されている。
 
 ```bash
-brew install stow
+brew bundle
 ```
 
 ### 4. Stow でシンボリックリンクを作成
 
 ```bash
-cd ~/dotfiles
 stow . --target=$HOME
 ```
 
@@ -60,17 +70,10 @@ git config --global user.name "Your Name"
 git config --global user.email "your@email.com"
 ```
 
-### 6. フォントをインストール
+### 6. GUI アプリの初回起動と権限付与
 
-```bash
-brew install --cask font-jetbrains-mono-nerd-font
-```
-
-### 7. アプリをインストール
-
-```bash
-brew install --cask ghostty wezterm
-```
+AeroSpace / SketchyBar / JankyBorders / Karabiner-Elements は初回起動時に
+アクセシビリティ・入力監視などの権限をシステム設定から手動で許可する必要がある。
 
 ## Stow の使い方
 

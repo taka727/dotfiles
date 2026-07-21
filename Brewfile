@@ -1,3 +1,6 @@
+# --- Dotfiles 管理 ---
+brew "stow"
+
 # --- Languages ---
 brew "node"
 brew "deno" # peek.nvim (Markdown プレビュー) が必要とする
@@ -21,8 +24,18 @@ brew "ripgrep"
 brew "fd"
 brew "gcalcli"
 
+# --- Window Manager / Bar ---
+tap "nikitabobko/tap"
+cask "nikitabobko/tap/aerospace" # ウィンドウマネージャー (.config/aerospace/)
+
+tap "FelixKratz/formulae"
+brew "sketchybar" # ステータスバー (.config/sketchybar/)
+brew "borders" # JankyBorders、フォーカス中ウィンドウの枠線 (.config/borders/)
+
 # --- GUI Apps ---
 cask "karabiner-elements"
+cask "wezterm"
+cask "ghostty"
 
 # --- Font ---
 cask "font-jetbrains-mono-nerd-font"
