@@ -6,6 +6,13 @@ local module = {}
 -- リーダーキー（必要になったら有効化）
 local leader = { key = "q", mods = "CTRL", timeout_milliseconds = 2000 }
 
+-- フォーカス中の macOS ウィンドウ（AeroSpace視点）に対してコマンドを実行
+local function aerospace(args)
+  return wezterm.action_callback(function()
+    wezterm.run_child_process({ "/bin/zsh", "-lc", "aerospace " .. args })
+  end)
+end
+
 local keys = {
   -- ウィンドウ
   { key = "n", mods = "LEADER", action = act.SpawnWindow },
@@ -29,13 +36,7 @@ local keys = {
   { key = "e", mods = "LEADER", action = act.ActivateKeyTable({ name = "resize_pane", one_shot = false, timeout_milliseconds = 3000 }) },
 
   -- AeroSpace のオン/オフ切り替え
-  {
-    key = "a",
-    mods = "LEADER",
-    action = wezterm.action_callback(function()
-      wezterm.run_child_process({ "/bin/zsh", "-lc", "aerospace enable toggle" })
-    end),
-  },
+  { key = "a", mods = "LEADER", action = aerospace("enable toggle") },
 
   -- ペインズーム
 
