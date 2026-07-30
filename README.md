@@ -75,6 +75,21 @@ git config --global user.email "your@email.com"
 AeroSpace / SketchyBar / JankyBorders / Karabiner-Elements は初回起動時に
 アクセシビリティ・入力監視などの権限をシステム設定から手動で許可する必要がある。
 
+### 7. SketchyBar 用に SbarLua をビルド
+
+SketchyBar の設定は Lua（SbarLua）で書かれている。Homebrew に配布物が無いため、
+モジュール本体と、それに ABI を合わせた `lua` インタープリタを一度だけソースからビルドする。
+
+```bash
+git clone https://github.com/FelixKratz/SbarLua.git /tmp/SbarLua
+cd /tmp/SbarLua
+make install                                             # sketchybar.so を ~/.local/share/sketchybar_lua/ に配置
+cp lua-5.5.0/src/lua ~/.local/share/sketchybar_lua/lua    # 同じソースからビルドした lua 本体
+ln -sf ~/.local/share/sketchybar_lua/lua /opt/homebrew/bin/lua
+cd ~ && rm -rf /tmp/SbarLua
+brew services restart sketchybar
+```
+
 ## Stow の使い方
 
 新しい設定ファイルを追加したあとにリンクを更新する場合:

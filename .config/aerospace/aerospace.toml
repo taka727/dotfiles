@@ -1,5 +1,13 @@
 config-version = 2
 
+# AeroSpace 起動時に SketchyBar も起動する
+after-startup-command = ['exec-and-forget brew services start sketchybar']
+
+# ワークスペース切り替え時に SketchyBar 側へ通知する（.config/sketchybar/items/spaces.lua が購読）
+exec-on-workspace-change = ['/bin/bash', '-c',
+  'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
+]
+
 [mode.main.binding]
 # Move focused window to another monitor
 alt-shift-right = 'move-node-to-monitor --wrap-around next'

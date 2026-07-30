@@ -40,15 +40,18 @@ brew bundle
 
 ### WezTerm (`.config/wezterm/`)
 - `wezterm.lua` がエントリポイント。6つのモジュールを `require()` して config builder に適用する
-- AeroSpace の起動・終了は WezTerm の `gui-startup` / `gui-shutdown` / `window-close-requested` イベント経由で制御
+- AeroSpace の有効/無効切り替えは `keymaps.lua` の `LEADER+a`（`aerospace enable toggle`）で手動操作する
 
 ### SketchyBar (`.config/sketchybar/`)
-- `sketchybarrc` は bash スクリプト。プラグインスクリプトは `plugins/` 以下
+- 設定は SbarLua（Lua バインディング）で書かれている。`sketchybarrc` が `~/.local/share/sketchybar_lua/sketchybar.so` を `require` し、`init.lua` → `bar.lua`/`default.lua`/`items/init.lua` を読み込む
+- SbarLua本体とビルド済み `lua` インタープリタはリポジトリ管理外（マシンごとにソースからビルドが必要、手順は README 参照）
 - テーマ: Tokyo Night（背景 `#1a1b26`、アイコン `#7aa2f7`）
-- レイアウト: スペース（左）→ フロントアプリ名（中央）→ 時計 / バッテリー / 音量（右）
+- レイアウト: スペース（左、AeroSpaceのワークスペースと連動）→ フロントアプリ名（中央）→ 時計 / バッテリー / 音量（右）
+- AeroSpace側の `exec-on-workspace-change` / `after-startup-command`（`.config/aerospace/aerospace.toml`）と連携している
 
 ### AeroSpace (`.config/aerospace/`)
-- ウィンドウマネージャー。モニターフォーカスとノード移動のバインドのみ設定（`alt-left/right`、`alt-shift-left/right`）
+- ウィンドウマネージャー。モニターフォーカス・ノード移動（`alt-left/right`、`alt-shift-left/right`）に加えて、フルスクリーン切替（`alt-f`）、リサイズモード（`alt-r`）、新規ワークスペースへの移動（`alt-shift-n`）、直前のワークスペースに戻る（`alt-shift-b`）を設定
+- `after-startup-command` で起動時に SketchyBar を起動、`exec-on-workspace-change` でワークスペース切り替えを SketchyBar に通知（`.config/sketchybar/items/spaces.lua` が購読）
 
 ## 管理対象外のファイル
 
