@@ -1,0 +1,13 @@
+#!/bin/zsh
+# フォーカス中ウィンドウを、現在使われていない番号の新規ワークスペースへ移動してそこにフォーカスする
+
+command -v aerospace >/dev/null || export PATH="/opt/homebrew/bin:$PATH"
+
+used=("${(@f)$(aerospace list-workspaces --all)}")
+
+n=1
+while (( ${used[(Ie)$n]} )); do
+  (( n++ ))
+done
+
+aerospace move-node-to-workspace "$n" --focus-follows-window

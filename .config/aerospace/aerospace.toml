@@ -15,6 +15,12 @@ alt-f = 'fullscreen'
 # リサイズモードへ（h/j/k/l で幅/高さ調整。esc か enter で main に戻る）
 alt-r = 'mode resize'
 
+# フォーカス中ウィンドウを新規ワークスペース（仮想ディスプレイ相当）に移動
+alt-shift-n = 'exec-and-forget ~/.config/bin/aerospace-move-to-new-workspace'
+
+# 直前にフォーカスしていたワークスペースに戻る
+alt-shift-b = 'workspace-back-and-forth'
+
 [mode.resize.binding]
 h = 'resize width -50'
 l = 'resize width +50'
