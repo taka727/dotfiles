@@ -40,29 +40,4 @@ require("workspace").apply_to_config(config)
 local calendar = require("calendar")
 calendar.apply_to_config(config)
 
--- wezterm-gui は Finder/Launch Services 経由で起動され PATH に
--- /opt/homebrew/bin を含まないため、ログインシェル経由で aerospace を呼ぶ
-local function aerospace_enable(on_off)
-  wezterm.run_child_process({ "/bin/zsh", "-lc", "aerospace enable " .. on_off })
-end
-
-wezterm.on("gui-startup", function(cmd)
-  aerospace_enable("on")
-  -- 起動時に自前でウィンドウを生成し、右側にカレンダーペインを常設する
-  local _, pane, _ = wezterm.mux.spawn_window(cmd or {})
-  calendar.open(pane)
-end)
-
-wezterm.on("gui-shutdown", function()
-  aerospace_enable("off")
-end)
-
-wezterm.on("window-close-requested", function(window, _pane)
-  local wins = wezterm.gui.gui_windows()
-  if #wins <= 1 then
-    aerospace_enable("off")
-  end
-  return false
-end)
-
 return config

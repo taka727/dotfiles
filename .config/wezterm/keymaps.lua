@@ -28,6 +28,15 @@ local keys = {
   -- ペインリサイズ（リサイズモードに入り、h/j/k/l で連続調整。Esc か q で抜ける）
   { key = "e", mods = "LEADER", action = act.ActivateKeyTable({ name = "resize_pane", one_shot = false, timeout_milliseconds = 3000 }) },
 
+  -- AeroSpace のオン/オフ切り替え
+  {
+    key = "a",
+    mods = "LEADER",
+    action = wezterm.action_callback(function()
+      wezterm.run_child_process({ "/bin/zsh", "-lc", "aerospace enable toggle" })
+    end),
+  },
+
   -- ペインズーム
 
   -- コピー・ペースト
