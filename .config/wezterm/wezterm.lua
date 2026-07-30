@@ -11,8 +11,8 @@ config.macos_forward_to_ime_modifier_mask = "SHIFT"
 config.font_size = 14.0
 config.font = wezterm.font("JetBrainsMono Nerd Font")
 
-config.window_background_opacity = 0.50
-config.macos_window_background_blur = 2
+config.window_background_opacity = 0.70
+config.macos_window_background_blur = 22
 
 config.status_update_interval = 1500
 
