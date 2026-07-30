@@ -11,7 +11,7 @@ config.macos_forward_to_ime_modifier_mask = "SHIFT"
 config.font_size = 14.0
 config.font = wezterm.font("JetBrainsMono Nerd Font")
 
-config.window_background_opacity = 0.70
+config.window_background_opacity = 0.85
 config.macos_window_background_blur = 22
 
 config.status_update_interval = 1500
@@ -36,26 +36,31 @@ require("keymaps").apply_to_config(config)
 require("tab").apply_to_config(config)
 require("statusbar").apply_to_config(config)
 require("workspace").apply_to_config(config)
-require("background").apply_to_config(config)
 
 local calendar = require("calendar")
 calendar.apply_to_config(config)
 
+-- wezterm-gui は Finder/Launch Services 経由で起動され PATH に
+-- /opt/homebrew/bin を含まないため、ログインシェル経由で aerospace を呼ぶ
+local function aerospace_enable(on_off)
+  wezterm.run_child_process({ "/bin/zsh", "-lc", "aerospace enable " .. on_off })
+end
+
 wezterm.on("gui-startup", function(cmd)
-  wezterm.run_child_process({ "aerospace", "enable", "on" })
+  aerospace_enable("on")
   -- 起動時に自前でウィンドウを生成し、右側にカレンダーペインを常設する
   local _, pane, _ = wezterm.mux.spawn_window(cmd or {})
   calendar.open(pane)
 end)
 
 wezterm.on("gui-shutdown", function()
-  wezterm.run_child_process({ "aerospace", "enable", "off" })
+  aerospace_enable("off")
 end)
 
 wezterm.on("window-close-requested", function(window, _pane)
   local wins = wezterm.gui.gui_windows()
   if #wins <= 1 then
-    wezterm.run_child_process({ "aerospace", "enable", "off" })
+    aerospace_enable("off")
   end
   return false
 end)
