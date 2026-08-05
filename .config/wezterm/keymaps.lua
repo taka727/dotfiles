@@ -13,6 +13,36 @@ local function aerospace(args)
   end)
 end
 
+-- 透過率: ALT+SHIFT+Z を長押しすると一時的に透けさせる
+-- WezTerm はキーの離上イベントを取得できないため、OS のキーリピートを利用する。
+-- 押すたびにカウントを更新し、一定時間（RELEASE_DELAY）後に押下回数が変化していなければ
+-- 「離された」とみなして元の透過率に戻す。
+local HOLD_OPACITY = 0.15
+local RELEASE_DELAY = 0.15 -- 秒
+local hold_press_count = {}
+local normal_opacity -- apply_to_config で config.window_background_opacity から設定される
+
+local transparency_hold = wezterm.action_callback(function(window, _pane)
+  local id = window:window_id()
+  hold_press_count[id] = (hold_press_count[id] or 0) + 1
+  local count = hold_press_count[id]
+
+  local overrides = window:get_config_overrides() or {}
+  if overrides.window_background_opacity ~= HOLD_OPACITY then
+    overrides.window_background_opacity = HOLD_OPACITY
+    window:set_config_overrides(overrides)
+  end
+
+  wezterm.time.call_after(RELEASE_DELAY, function()
+    if hold_press_count[id] ~= count then
+      return -- その間に再度押されている＝まだ押しっぱなし
+    end
+    local released_overrides = window:get_config_overrides() or {}
+    released_overrides.window_background_opacity = normal_opacity
+    window:set_config_overrides(released_overrides)
+  end)
+end)
+
 local keys = {
   -- ウィンドウ
   { key = "n", mods = "LEADER", action = act.SpawnWindow },
@@ -40,6 +70,9 @@ local keys = {
 
   -- ペインズーム
 
+  -- 透過率（長押しで透ける、離すと戻る）
+  { key = "Z", mods = "ALT|SHIFT", action = transparency_hold },
+
   -- コピー・ペースト
 
   -- スクロール
@@ -63,6 +96,7 @@ local key_tables = {
 }
 
 function module.apply_to_config(config)
+  normal_opacity = config.window_background_opacity
   config.leader = leader
   config.disable_default_key_bindings = false
   config.keys = keys
