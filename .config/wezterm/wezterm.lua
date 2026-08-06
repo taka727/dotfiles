@@ -12,7 +12,7 @@ config.font_size = 14.0
 config.font = wezterm.font("JetBrainsMono Nerd Font")
 
 config.window_background_opacity = 0.85
-config.macos_window_background_blur = 22
+config.macos_window_background_blur = 15
 
 config.status_update_interval = 1500
 

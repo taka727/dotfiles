@@ -24,6 +24,11 @@ brew "ripgrep"
 brew "fd"
 brew "gcalcli"
 
+# --- Cloud (AWS) ---
+brew "awscli" # AWS CLI 本体
+brew "aws-vault" # AWS認証情報を平文で~/.aws/credentialsに置かず、OSキーチェーンで安全に管理する
+cask "session-manager-plugin" # `aws ssm start-session` でSSH鍵なしにEC2へ接続するためのプラグイン
+
 # --- Window Manager / Bar ---
 tap "nikitabobko/tap"
 cask "nikitabobko/tap/aerospace" # ウィンドウマネージャー (.config/aerospace/)
