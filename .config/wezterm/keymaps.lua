@@ -46,6 +46,9 @@ local keys = {
   -- ペイン移動（各ペインにアルファベットを表示し、押すとジャンプ）
   { key = ";", mods = "CTRL", action = act.PaneSelect({ alphabet = "asdfghjklqwertyuiopzxcvbnm", mode = "Activate" }) },
 
+  -- ペイン入れ替え（選んだペインとフォーカス中のペインを入れ替え）
+  { key = "w", mods = "LEADER", action = act.PaneSelect({ alphabet = "asdfghjklqwertyuiopzxcvbnm", mode = "SwapWithActive" }) },
+
   -- ペイン分割
   { key = "r", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
   { key = "d", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
