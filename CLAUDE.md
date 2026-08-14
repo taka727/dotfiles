@@ -35,7 +35,7 @@ brew bundle
 ### Neovim (`.config/nvim/`)
 - `init.lua` が lazy.nvim をブートストラップし、`config/` と `plugins/` を読み込む
 - `lua/config/options.lua` / `lua/config/keymaps.lua` — 基本設定。`<Leader>` は `<Space>`
-- `lua/plugins/` — 関心ごとにファイル分割: `colorscheme`、`editor`（Telescope + Treesitter）、`lsp`（Mason → mason-lspconfig → nvim-lspconfig + nvim-cmp）、`git`、`markdown`、`terminal`、`ime`（im-select で挿入モード離脱時に英字入力へ切替）
+- `lua/plugins/` — 関心ごとにファイル分割: `colorscheme`、`editor`（Telescope + Treesitter）、`lsp`（Mason → mason-lspconfig → nvim-lspconfig + nvim-cmp）、`format`（conform.nvim + mason-tool-installer で `<Leader>fm` フォーマット・保存時自動整形）、`git`、`markdown`、`terminal`、`ime`（im-select で挿入モード離脱時に英字入力へ切替）
 - LSP サーバーは Mason で管理: `lua_ls`、`ts_ls`、`pyright`
 
 ### WezTerm (`.config/wezterm/`)
