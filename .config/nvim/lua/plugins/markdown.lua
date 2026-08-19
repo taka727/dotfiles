@@ -1,5 +1,13 @@
 return {
   {
+    "tadmccorkle/markdown.nvim",
+    ft = "markdown",
+    config = true,
+    -- デフォルトキーマップ: gs+モーション+b/i/s/c で太字/斜体/取り消し線/コードをトグル
+    -- (例: gsiwb で単語を太字化、ビジュアル選択中は gsb)
+    -- ]] / [[ / ]c / ]p で見出し間を移動
+  },
+  {
     "bullets-vim/bullets.vim",
     ft = { "markdown", "text", "gitcommit" },
     init = function()
