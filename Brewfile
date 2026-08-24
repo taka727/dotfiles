@@ -24,6 +24,7 @@ brew "eza"
 brew "ripgrep"
 brew "fd"
 brew "gcalcli"
+brew "herdr" # コーディングエージェント向けターミナルマルチプレクサ、クラッシュ耐性の保険として導入
 
 # --- Cloud (AWS) ---
 brew "awscli" # AWS CLI 本体
