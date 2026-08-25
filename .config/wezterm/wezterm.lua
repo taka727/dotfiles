@@ -9,7 +9,13 @@ config.automatically_reload_config = true
 config.macos_forward_to_ime_modifier_mask = "SHIFT"
 
 config.font_size = 14.0
-config.font = wezterm.font("JetBrainsMono Nerd Font")
+-- 全角文字（句読点等）は JetBrainsMono にグリフが無く自動フォールバックされる。
+-- フォールバック先を明示しないと句読点が中央寄せの配置になるフォントが選ばれることがあるため、
+-- 日本語の配置に合う Hiragino Sans を明示的に指定する。
+config.font = wezterm.font_with_fallback({
+  "JetBrainsMono Nerd Font",
+  "Hiragino Sans",
+})
 
 config.window_background_opacity = 0.85
 config.macos_window_background_blur = 15
