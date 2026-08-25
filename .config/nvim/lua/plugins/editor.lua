@@ -10,6 +10,7 @@ return {
       { "<leader>fg", "<cmd>Telescope live_grep<cr>",   desc = "Live grep" },
       { "<leader>fb", "<cmd>Telescope buffers<cr>",     desc = "Buffers" },
       { "<leader>fr", "<cmd>Telescope oldfiles<cr>",    desc = "Recent files" },
+      { "<leader>fk", "<cmd>Telescope keymaps<cr>",     desc = "Keymaps" },
     },
     config = function()
       require("telescope").setup({
