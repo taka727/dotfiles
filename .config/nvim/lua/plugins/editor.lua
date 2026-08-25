@@ -20,6 +20,19 @@ return {
   },
 
   {
+    "stevearc/oil.nvim",
+    keys = {
+      { "<leader>fo", "<cmd>Oil<cr>", desc = "Open parent directory (oil)" },
+    },
+    opts = {
+      default_file_explorer = true,
+      view_options = {
+        show_hidden = true,
+      },
+    },
+  },
+
+  {
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
     build = ":TSUpdate",
