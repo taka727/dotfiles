@@ -7,13 +7,15 @@ return {
     -- (例: gsiwb で単語を太字化、ビジュアル選択中は gsb)
     -- ]] / [[ / ]c / ]p で見出し間を移動
     init = function()
-      -- <Leader>m1〜<Leader>m6 で現在行を各レベルの見出しにして挿入モードに入る
+      -- <Leader>ma/s/d/f/g/h で現在行を見出しレベル1〜6にして挿入モードに入る
       -- 既存の見出し記号は付け替え、行にテキストがあればそのまま見出し文になる
+      -- 数字キーはレイヤー切り替えが必要なため、ホームポジションの文字を左から順に割り当てている
+      local heading_keys = { "a", "s", "d", "f", "g", "h" }
       vim.api.nvim_create_autocmd("FileType", {
         pattern = "markdown",
         callback = function(args)
-          for level = 1, 6 do
-            vim.keymap.set("n", "<Leader>m" .. level, function()
+          for level, key in ipairs(heading_keys) do
+            vim.keymap.set("n", "<Leader>m" .. key, function()
               local text = vim.api.nvim_get_current_line():gsub("^%s*#*%s*", "")
               vim.api.nvim_set_current_line(string.rep("#", level) .. " " .. text)
               vim.cmd("startinsert!")
