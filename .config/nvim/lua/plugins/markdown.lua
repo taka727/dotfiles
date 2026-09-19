@@ -13,8 +13,23 @@ return {
     init = function()
       vim.g.bullets_enabled_file_types = { "markdown", "text", "gitcommit" }
       vim.g.bullets_enable_in_empty_buffers = 0
-      vim.g.bullets_set_mappings = 1
       vim.g.bullets_outline_levels = { "ROM", "ABC", "num", "abc", "rom", "std-" }
+      -- チェックボックスのトグルは obsidian.nvim の <Leader>ot に統一するため、
+      -- bullets.vim のデフォルトキーマップを切り、<Leader>x 以外を手動で定義する
+      vim.g.bullets_set_mappings = 0
+      vim.g.bullets_custom_mappings = {
+        { "imap", "<cr>", "<Plug>(bullets-newline)" },
+        { "inoremap", "<C-cr>", "<cr>" },
+        { "nmap", "o", "<Plug>(bullets-newline)" },
+        { "vmap", "gN", "<Plug>(bullets-renumber)" },
+        { "nmap", "gN", "<Plug>(bullets-renumber)" },
+        { "imap", "<C-t>", "<Plug>(bullets-demote)" },
+        { "nmap", ">>", "<Plug>(bullets-demote)" },
+        { "vmap", ">", "<Plug>(bullets-demote)" },
+        { "imap", "<C-d>", "<Plug>(bullets-promote)" },
+        { "nmap", "<<", "<Plug>(bullets-promote)" },
+        { "vmap", "<", "<Plug>(bullets-promote)" },
+      }
     end,
   },
   {
