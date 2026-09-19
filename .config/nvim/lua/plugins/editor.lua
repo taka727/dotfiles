@@ -22,6 +22,8 @@ return {
 
   {
     "stevearc/oil.nvim",
+    -- `nvim .` でディレクトリを開いた時点で oil を起動させるため遅延読み込みしない
+    lazy = false,
     keys = {
       { "<leader>fo", "<cmd>Oil<cr>", desc = "Open parent directory (oil)" },
     },
