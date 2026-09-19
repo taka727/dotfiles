@@ -26,9 +26,10 @@ git:
   autoFetch: true
   autoRefresh: true
   # ページングツール（delta が入っている場合は自動で使われる）
-  pagers:
+  diffRenderers:
     - colorArg: always
       useConfig: true
+      type: rawGit
 # Vim スタイルのキーバインド
 keybinding:
   universal:
