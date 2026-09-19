@@ -22,7 +22,10 @@ return {
       "ClaudeCodeCloseAllDiffs",
     },
     keys = {
-      { "<leader>a", nil, desc = "AI/Claude Code" },
+      -- which-key 用のグループ見出し ({ "<leader>a", nil }) は定義しない。
+      -- <Leader>a 自体が完結したマッピングになり、次のキーまで timeoutlen 待つ間に
+      -- 発火してしまうと、後続の文字が素の normal コマンド (c/a/d など) として
+      -- 実行されて意図せず挿入モードに入るため。
       { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
       { "<leader>af", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
       { "<leader>ar", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
