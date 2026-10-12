@@ -1,0 +1,25 @@
+# NOTE: the presence of this file REPLACES stow's built-in default ignore list,
+# so the defaults are reproduced here verbatim before our own additions.
+RCS
+.+,v
+CVS
+\.\#.+
+\.cvsignore
+\.svn
+_darcs
+\.hg
+\.git
+\.gitignore
+\.gitmodules
+.+~
+\#.*\#
+^/README.*
+^/LICENSE.*
+^/COPYING
+
+# Repo-local agent memory: keep it out of $HOME so it does not load as an
+# ancestor CLAUDE.md in every unrelated project under ~.
+^/CLAUDE\.md$
+
+# Repo documentation (evaluation notes etc.), not a dotfile.
+^/docs$
