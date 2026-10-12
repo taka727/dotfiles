@@ -3,3 +3,6 @@
 .config/zsh/.zcompdump
 .config/zsh/.zcompcache/
 .config/karabiner/automatic_backups/
+# Herdr: config.toml 以外（ログ・ソケット・session.json 等）は実行時に生成される
+.config/herdr/*
+!.config/herdr/config.toml

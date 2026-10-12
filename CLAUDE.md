@@ -53,6 +53,12 @@ brew bundle
 - ウィンドウマネージャー。モニターフォーカス・ノード移動（`alt-left/right`、`alt-shift-left/right`）に加えて、フルスクリーン切替（`alt-f`）、リサイズモード（`alt-r`）、新規ワークスペースへの移動（`alt-shift-n`）、直前のワークスペースに戻る（`alt-shift-b`）を設定
 - `after-startup-command` で起動時に SketchyBar を起動、`exec-on-workspace-change` でワークスペース切り替えを SketchyBar に通知（`.config/sketchybar/items/spaces.lua` が購読）
 
+### Herdr (`.config/herdr/`)
+- AI コーディングエージェント向けのターミナルマルチプレクサ。管理しているのは `config.toml` のみ
+- `~/.config/herdr/` はログ・ソケット・`session.json` が置かれる実ディレクトリのため、`config.toml` 単体をシンボリックリンクしている（ディレクトリごと畳み込まない）。`.gitignore` で `config.toml` 以外を除外している
+- アプリ内の設定画面からの保存もリンク先（このリポジトリ）に書き込まれる
+- 全項目のテンプレートは `herdr --default-config`。変更後は `herdr config check` で検証し、`herdr server reload-config`（または `prefix+shift+r`）で反映する
+
 ## 管理対象外のファイル
 
 | ファイル / ディレクトリ | 理由 |
@@ -63,3 +69,4 @@ brew bundle
 | `~/.config/zsh/.zsh_history` | シェルの実行履歴。コマンドに含まれる情報が漏れる可能性がある |
 | `~/.config/zsh/.zcompdump`、`.zcompcache/` | zsh の補完キャッシュ。環境ごとに自動生成される |
 | `~/.config/karabiner/automatic_backups/` | Karabiner-Elements が自動生成するバックアップ |
+| `~/.config/herdr/`（`config.toml` 以外） | Herdr のログ・ソケット・セッション情報。実行時に生成される |

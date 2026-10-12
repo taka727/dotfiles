@@ -1,0 +1,15 @@
+onboarding = false
+
+[ui]
+status_indicators = "symbols"
+
+# サイドバー: 開閉は prefix+b（ctrl+b → b）
+# 幅はワークスペース名に合わせて min〜max で自動調整されるので、max も 22 にして狭いまま固定する
+sidebar_width = 22
+sidebar_max_width = 22
+sidebar_start_collapsed = false   # 起動時は開いた状態（true で畳んだ状態から起動、次回起動時に反映）
+sidebar_collapsed_mode = "compact" # 畳んだときは状態マークの細い帯を残す（"hidden" で完全に隠す）
+
+[theme]
+name = "kanagawa"
+auto_switch = false
