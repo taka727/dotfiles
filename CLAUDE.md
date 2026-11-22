@@ -36,7 +36,8 @@ brew bundle
 - `init.lua` が lazy.nvim をブートストラップし、`config/` と `plugins/` を読み込む
 - `lua/config/options.lua` / `lua/config/keymaps.lua` — 基本設定。`<Leader>` は `<Space>`
 - `lua/plugins/` — 関心ごとにファイル分割: `colorscheme`、`editor`（Telescope + Treesitter）、`lsp`（Mason → mason-lspconfig → nvim-lspconfig + nvim-cmp）、`format`（conform.nvim + mason-tool-installer で `<Leader>fm` フォーマット・保存時自動整形）、`git`、`markdown`、`terminal`、`ime`（im-select で挿入モード離脱時に英字入力へ切替）
-- LSP サーバーは Mason で管理: `lua_ls`、`ts_ls`、`pyright`
+- LSP サーバーは Mason で管理: `lua_ls`、`ts_ls`、`pyright`、`biome`、`tailwindcss`（biome / tailwindcss は該当プロジェクトでのみ起動）
+- JS/TS/JSON/CSS の整形は、`biome.json` があるプロジェクトでは `biome-check`、それ以外は `prettier`（`format.lua` の `biome_or_prettier`）
 
 ### WezTerm (`.config/wezterm/`)
 - `wezterm.lua` がエントリポイント。6つのモジュールを `require()` して config builder に適用する

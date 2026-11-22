@@ -5,7 +5,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     dependencies = { "williamboman/mason.nvim" },
     opts = {
-      ensure_installed = { "lua_ls", "ts_ls", "pyright" },
+      ensure_installed = { "lua_ls", "ts_ls", "pyright", "biome", "tailwindcss" },
       automatic_installation = true,
     },
   },
@@ -22,8 +22,19 @@ return {
         capabilities = require("cmp_nvim_lsp").default_capabilities(),
       })
 
+      -- shadcn/ui の cn() / cva() の引数内でも Tailwind のクラス補完を効かせる
+      vim.lsp.config("tailwindcss", {
+        settings = {
+          tailwindCSS = {
+            classFunctions = { "cn", "cva" },
+          },
+        },
+      })
+
       -- LSPサーバーを有効化（nvim-lspconfig がデフォルト設定を提供）
-      vim.lsp.enable({ "lua_ls", "ts_ls", "pyright" })
+      -- biome: biome.json があるプロジェクトでのみ起動（node_modules/.bin/biome を優先）
+      -- tailwindcss: package.json に tailwindcss があるプロジェクトでのみ起動（v4 は設定ファイル不要）
+      vim.lsp.enable({ "lua_ls", "ts_ls", "pyright", "biome", "tailwindcss" })
 
       -- LSP接続時のみキーマップを設定
       vim.api.nvim_create_autocmd("LspAttach", {

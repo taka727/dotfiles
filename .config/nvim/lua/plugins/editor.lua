@@ -47,8 +47,18 @@ return {
 
       require("nvim-treesitter").install(parsers)
 
+      -- tsconfig.json / biome.json などの jsonc は json パーサーで扱う
+      vim.treesitter.language.register("json", "jsonc")
+
+      -- FileType の pattern にはパーサー名ではなく filetype を指定する
+      -- （例: .tsx の filetype は typescriptreact、.sh は sh）
+      local filetypes = {
+        "lua", "javascript", "javascriptreact", "typescript", "typescriptreact",
+        "python", "go", "html", "css", "json", "jsonc", "yaml", "markdown", "sh", "bash",
+      }
+
       vim.api.nvim_create_autocmd("FileType", {
-        pattern = parsers,
+        pattern = filetypes,
         callback = function()
           vim.treesitter.start()
           vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
