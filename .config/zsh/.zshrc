@@ -91,6 +91,10 @@ chpwd_functions+=(_show_git_repo_info)
 # 起動時にすでに git ディレクトリにいる場合も表示
 _show_git_repo_info
 
+# --- Herdr ---
+# ~/Herdr を起点に起動する（プラグイン・スクリプト等は ~/Herdr、config.toml は ~/.config/herdr）
+herd() { cd "$HOME/Herdr" && herdr "$@"; }
+
 # --- Docker Aliases ---
 alias ld='lazydocker'
 alias dps='docker ps'
@@ -101,3 +105,37 @@ alias dcp='docker compose'
 alias dcup='docker compose up -d'
 alias dcdn='docker compose down'
 alias dcrst='docker compose down && docker compose up -d'
+
+# --- agy Review Helpers (Greptile substitute) ---
+# 使い方:
+#   agy-review [追加の指示]   … ステージ済み差分 (git diff --cached) のクロスファイル影響レビュー
+#   agy-pr-review [base]       … base ブランチ（省略時は origin/HEAD → main → master）からの PR 前レビュー
+_agy_review_base() {
+  local b
+  if b=$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null); then
+    echo "$b"; return 0
+  fi
+  for b in main master; do
+    git rev-parse --verify --quiet "$b" >/dev/null && { echo "$b"; return 0; }
+  done
+  return 1
+}
+
+agy-review() {
+  git rev-parse --is-inside-work-tree >/dev/null 2>&1 || { echo "agy-review: git リポジトリ内で実行してください" >&2; return 1; }
+  if git diff --cached --quiet; then
+    echo "agy-review: ステージされた変更がありません（先に git add してください）" >&2; return 1
+  fi
+  agy --dangerously-skip-permissions -p "git diff --cached の変更点を読み取り、AGENTS.md のレビューガイドラインに従って、リポジトリ全体への波及影響や破壊的変更がないか厳格にレビューしてください。変更されたシンボルの呼び出し元はリポジトリ内を検索して確認してください。コードは一切編集せず、指摘のみを出力してください。${*:+ 追加の指示: $*}"
+}
+
+agy-pr-review() {
+  git rev-parse --is-inside-work-tree >/dev/null 2>&1 || { echo "agy-pr-review: git リポジトリ内で実行してください" >&2; return 1; }
+  local base mb
+  base=${1:-$(_agy_review_base)} || { echo "agy-pr-review: base ブランチを特定できません（引数で指定してください）" >&2; return 1; }
+  mb=$(git merge-base "$base" HEAD) || { echo "agy-pr-review: $base との merge-base が見つかりません" >&2; return 1; }
+  if git diff --quiet "$mb" HEAD; then
+    echo "agy-pr-review: $base からの差分がありません" >&2; return 1
+  fi
+  agy --dangerously-skip-permissions -p "git diff ${mb}..HEAD（${base} からの分岐点〜HEAD の全変更）と git log --oneline ${mb}..HEAD を調査し、AGENTS.md のレビューガイドラインに従って、潜在的なバグ・型不整合・リポジトリ全体との不整合・アーキテクチャ上の懸念を網羅的にレビューしてレポートしてください。コードは一切編集せず、指摘のみを出力してください。"
+}
