@@ -60,6 +60,13 @@ brew bundle
 - アプリ内の設定画面からの保存もリンク先（このリポジトリ）に書き込まれる
 - 全項目のテンプレートは `herdr --default-config`。変更後は `herdr config check` で検証し、`herdr server reload-config`（または `prefix+shift+r`）で反映する
 
+### mise (`.config/mise/`)
+- ランタイムのバージョン管理。Node は Homebrew ではなく mise で入れる（Brewfile に `node` は置かない）
+- `config.toml` がグローバル設定（`node = "lts"`、npm のグローバル CLI は `"npm:<pkg>"` で管理）。プロジェクトごとのバージョンは各リポジトリの `mise.toml` で上書きする
+- `.zprofile` で `mise activate zsh --shims`（非対話シェル・GUI 起動のツール向け）、`.zshrc` で `mise activate zsh`（対話シェルでディレクトリごとに自動切替）
+- Mason の LSP（ts_ls / tailwindcss 等）も mise の node で動く
+- 変更後は `mise install`、lts / latest の更新は `mise upgrade`
+
 ## 管理対象外のファイル
 
 | ファイル / ディレクトリ | 理由 |

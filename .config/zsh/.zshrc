@@ -1,6 +1,11 @@
 # --- Homebrew Path ---
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
+# --- mise (ランタイムのバージョン管理) ---
+# Homebrew より後に評価して、mise 管理のツールを PATH の先頭に置く
+# ディレクトリ移動時に mise.toml を読んでバージョンを自動切替する
+eval "$(mise activate zsh)"
+
 # --- WezTerm Shell Integration (ScrollToPromptを有効化) ---
 if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
   local _wsi="/Applications/WezTerm.app/Contents/Resources/shell-integration.sh"

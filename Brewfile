@@ -2,7 +2,7 @@
 brew "stow"
 
 # --- Languages ---
-brew "node"
+brew "mise" # ランタイムのバージョン管理（node 等は .config/mise/config.toml と各プロジェクトの mise.toml で管理）
 brew "deno" # peek.nvim (Markdown プレビュー) が必要とする
 brew "tree-sitter-cli" # nvim-treesitter のパーサーをビルドするために必要
 

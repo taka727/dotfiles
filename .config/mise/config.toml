@@ -1,0 +1,7 @@
+# mise のグローバル設定（~/.config/mise/config.toml に stow でリンク）
+# プロジェクトごとのバージョンは各リポジトリの mise.toml で上書きする
+# 変更後は `mise install` で反映、`mise upgrade` で lts / latest を最新に更新
+
+[tools]
+node = "lts" # Mason の LSP（ts_ls / tailwindcss 等）や npx もこの Node で動く
+"npm:ccusage" = "latest" # Claude Code の使用量集計 CLI
